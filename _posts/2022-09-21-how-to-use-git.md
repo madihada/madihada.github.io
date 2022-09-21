@@ -35,7 +35,9 @@ title:  "Github 사용방법!"
 ```
   git branch <브랜치 이름>  (local branch 생성)
   git checkout <브랜치 이름>  (사용 할 branch 체크아웃)
+  git checkout -b <브랜치 이름>  (branch 생성 이동)
   git branch -r  (remote branch 목록 보기)
+
 ```
 
 
