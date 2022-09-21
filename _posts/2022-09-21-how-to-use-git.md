@@ -60,17 +60,35 @@ vscode 터미널을 git bash로 설정
 ```
 
 
-
-## 3. 원격 branch와 연동
-
+중요중요!!!!!
+## 3. 로컬 branch와 원격 branch 연동
+```
+  git remote add origin <원격주소>
+  git branch -M main
+```
 #### 첫째, local branch를 remote branch에 추가
 ```
-  git push origin <브랜치 이름> 
+  git push -u origin <로컬브랜치와 동일한 이름의 원격브랜치(sync)> 
 ```
 #### 둘째, local branch, remote branch 연동
 ```
   git branch --set-upstream-to origin/<브랜치 이름> 
 ```  
+
+```
+  / /로컬 브랜치 원격에 넣어주기
+  git switch -c <브랜치이름>
+  git push -u origin <동일한브랜치이름>
+  // 원격 브랜치 로컬에 받아오기
+  git branch -a (원격의 변경사항 확인)
+  git fetch
+  
+  
+  // cmd에서 원격 -> 로컬 브랜치 생성  
+  git switch -t origin/<동일한브랜치이름> (로컬에 같은 이름의 브랜치 생성하여 연결 switch)
+  // cmd에서 원격 브랜치 삭제
+  git push origin --delete <삭제한브랜치>
+``` 
 
 
 
@@ -112,8 +130,17 @@ vscode 터미널을 git bash로 설정
   git add .
   git commit -m "Title"
   git pull origin <브랜치 이름> 
+``` 
+중요!!
+#### 로컬에서 작업한 내용을 push할 때, 원격에 commit되어있어서 pull 을 먼저 해야 할 경우
+## Merge 방법 : 로컬 브렌치가 원격 보다 앞에 커밋되어 git push 가능함
+```
+  git pull --no-rebase
 ```  
-
+## Rebase 방법 : 로컬 브렌치가 원격 보다 앞에 커밋되어 git push 가능함
+```
+  git pull --rebase
+```  
 
 
 ## 7. remote repository와 remote repository 합치기(브랜치와 브랜치 합치기)
@@ -139,4 +166,11 @@ vscode 터미널을 git bash로 설정
   git revert --continue
 ```
 
-## 8. 시간을 과거로 되돌리기 (Reset and Revert)
+## 9. Merge 시 Conflict
+```
+  git merge --abort
+  git merge <없어질 브랜치> 
+  
+  git rebase --about
+  git rebase --continue
+```
