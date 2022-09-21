@@ -19,7 +19,7 @@ sourceTree설치하여 GUI도 볼 수 있도록한다.
 vscode 터미널을 git bash로 설정
  
 
-```cs
+```
   git config --global user.name "madihada"
   git config --global user.email "tlarbgus89@gmail.com" (깃헙로그인메일주소)
 ```
