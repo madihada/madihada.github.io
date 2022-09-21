@@ -1,3 +1,24 @@
+---
+layout: single
+title:  "Github 사용방법!"
+---
+
+깃을 사용하기 위해서는 먼저 작업공간, 저장공간의 구분을 인식해야한다. 그리고 이 공간들은 브랜치에 따라 달라진다.(두 가지 개념때문에 이해가 어려웠던거같음)
+첫번째, 로컬에서의 작업공간, 로컬 repository, 리모트 repository의 구분
+두번째, 로컬에서의 branch들과 원격에서의 branch들의 다름.(그러므로 연동이되어야만 헷갈리지 않을 수 있음)
+
+첫번째 개념을 이해하면 1, 2번을 이해하고
+두번째 개념을 이해하면 3번을 이해하고
+
+이들을 이해하면 3가지 다른 공간에서 서로 통신, 그리고 브랜치에서 
+
+## 0. 기본설정
+```
+  
+```
+
+
+
 ## 1. 로컬 repository 생성
   #### 먼저, repository 생성
 ```
@@ -49,8 +70,19 @@
 
 
 ## 6. remote repository와 local repository 합치기
+다른 개발자가 작업한 remote repository를 pull하기 위해서는 먼저 나의 로컬 repository를 commit해줘야한다!
 ```
+  git status
+  git add .
+  git commit -m "Title"
   git pull
+```  
+
+
+
+## 7. remote repository와 remote repository 합치기(브랜치와 브랜치 합치기)
+```
+  remote repository에서 Branches로 New pull request > Create pull request > Comment > Merge pull request 의 순서로 진행
 ```  
 
 
