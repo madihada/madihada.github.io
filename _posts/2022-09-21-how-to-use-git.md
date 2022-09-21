@@ -14,17 +14,17 @@ title:  "Github 사용방법!"
 
 ## 0. 기본설정
 ```
-  
+  git config --global core.autocrlf true(윈도우사용자) (맥 사용자는 true 대신 input)
 ```
 
 
 
 ## 1. 로컬 repository 생성
-  #### 먼저, repository 생성
+#### 먼저, repository 생성
 ```
   git init(작업될 폴더에)
 ```
-  #### 그리고 원격과 통신하도록 원격 url을 origin에 넣어놓기
+#### 그리고 원격과 통신하도록 원격 url을 origin에 넣어놓기
 ```
   git remote add origin https://github.com/madihada/funvoca.git
 ```
@@ -42,11 +42,11 @@ title:  "Github 사용방법!"
 
 ## 3. 원격 branch와 연동
 
-  #### 첫째, local branch를 remote branch에 추가
+#### 첫째, local branch를 remote branch에 추가
 ```
   git push origin <브랜치 이름> 
 ```
-  #### 둘째, local branch, remote branch 연동
+#### 둘째, local branch, remote branch 연동
 ```
   git branch --set-upstream-to origin/<브랜치 이름> 
 ```  
@@ -75,7 +75,7 @@ title:  "Github 사용방법!"
   git status
   git add .
   git commit -m "Title"
-  git pull
+  git pull origin <브랜치 이름> 
 ```  
 
 
