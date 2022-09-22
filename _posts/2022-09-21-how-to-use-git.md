@@ -79,7 +79,10 @@ vscode 터미널을 git bash로 설정
 ```
   git branch --set-upstream-to origin/<브랜치 이름> 
 ```  
+#### 둘째, remote에있는 브랜치 가져오기 연동
 
+```
+  git checkout --track origin/utility
 ```
   / /로컬 브랜치 원격에 넣어주기
   git switch -c <브랜치이름>
