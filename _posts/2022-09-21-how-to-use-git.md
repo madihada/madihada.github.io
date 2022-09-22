@@ -168,6 +168,10 @@ vscode 터미널을 git bash로 설정
   git reset --hard <커밋주소>
   git reset --hard (이렇게하면 직전으로 돌아감)
 ``` 
+그러면 리모트도 로컬과 맞춰줘야하는데 그냥 push 하면 오류
+```
+  git push -f origin <브랜치이름>
+```
 #### Revert (전 커밋으로 되돌아가면서 커밋 생성하는것(지우는것없음))
 ```
   git log
