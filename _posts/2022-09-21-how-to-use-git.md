@@ -29,7 +29,7 @@ vscode 터미널을 git bash로 설정
   git config --global user.email "tlarbgus89@gmail.com" (깃헙로그인메일주소)
 ```
 ```
-  git config --global init.defaultBranch main
+  git branch -m master main
 ```
 ```
   git config --global core.autocrlf true(윈도우사용자) (맥 사용자는 true 대신 input)
