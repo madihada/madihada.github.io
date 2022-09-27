@@ -7,9 +7,9 @@ title:  "Web Server Deployment(Nginx, Soket, uWsigi) 2단계!"
 
 두번째 단계!
 
-1. Nginx 설치 > Nginx를 socket과 연결하기 > 
-2. uWSGI 설치 > uWSGI를 socket과 연결하기 > uWSGI를 Django와 연결하기 > 
-3. 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
+## 1. Nginx 설치 > Nginx를 socket과 연결하기 > 
+## 2. uWSGI 설치 > uWSGI를 socket과 연결하기 > uWSGI를 Django와 연결하기 > 
+## 3. 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
 4. emp
 <br>
 
@@ -29,6 +29,7 @@ Nginx
 <br>
 
 ## 1. Nginx 설치 > Nginx를 socket과 연결하기 >
+(vi uwsgi.ini 으로 파일생성)
 
 #### 참고자료
 ##### [nginx 설정 파일 추가 거의 없도록, static파일 위치 정확히 설정된 방법](https://www.youtube.com/watch?v=oGQ1HteFYnQ&t=1217s&ab_channel=%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC%EB%8F%99%EA%B5%AD%EB%8C%80%ED%95%99%EA%B5%90)
@@ -99,12 +100,12 @@ import os
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 ```
-##### cmd에 명령어 입력
+##### static, media 폴더 생성 
 ```
 python manage.py collectstatic
-sudo /etc/init.d/nginx restart
 mkdir media
 wget https://upload.wikimedia.org/wikipedia/commons/b/b9/First-google-logo.gif -O media/media.gif
+sudo /etc/init.d/nginx restart
 ```
 <br>
 
@@ -120,6 +121,43 @@ pip install uwsgi
 ```
 uwsgi --http :8000 --module funvocaback.wsgi
 uwsgi --http :8000 --module funvocaback.wsgi
+// /home/ubuntu/funvocaback(프로젝트이름)/funvocaback.sock과
+// /home/ubuntu/funvocaback(프로젝트이름/mywebserver(앱이름)/mywebserver.wsgi
+uwsgi --socket funvocaback.sock --module mywebserver.wsgi --chmod-socket=666
+```
+
+## 3. 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
+vim funvocaback_uwsgi.ini
+```
+[uwsgi]
+# full path to Django project's root directory
+chdir            = /home/ubuntu/<funvocaback>/
+# Django's wsgi file
+module           = <mywebserver>.wsgi
+# full path to python virtual env
+home             = /home/ubuntu/<funvocaback>/venv
+# enable uwsgi master process
+master          = true
+# maximum number of worker processes
+processes       = 10
+# the socket (use the full path to be safe
+socket          = /home/ubuntu/<funvocaback>/<funvocaback>.sock
+# socket permissions
+chmod-socket    = 666
+# clear environment on exit
+vacuum          = true
+# daemonize uwsgi and write messages into given log
+daemonize       = /home/ubuntu/uwsgi-emperor.log
+```
+#### uWSGI root에서 실행
+```
+uwsgi --ini microdomains_uwsgi.ini
+```
+uWSGI emperor mode로 실행
+```
+cd /home/ubuntu/venv/
+mkdir vassals
+sudo ln -s /home/ubuntu/funvocaback/funvocaback_uwsgi.ini /home/udoms/env/md/vassals/
 ```
 
 
@@ -137,24 +175,23 @@ uwsgi --socket <funvocaback.sock> --module <mywebserver>.wsgi --chmod-socket=666
 ```
 [uwsgi]
 # full path to Django project's root directory
-chdir            = /home/udoms/microdomains/
+chdir            = /home/ubuntu/<funvocaback>/
 # Django's wsgi file
-module           = microdomains.wsgi
+module           = <mywebserver>.wsgi
 # full path to python virtual env
-home             = /home/udoms/env/md
+home             = /home/ubuntu/<funvocaback>/venv
 # enable uwsgi master process
 master          = true
 # maximum number of worker processes
 processes       = 10
 # the socket (use the full path to be safe
-socket          = /home/udoms/microdomains/microdomains.sock
+socket          = /home/ubuntu/<funvocaback>/<funvocaback>.sock
 # socket permissions
 chmod-socket    = 666
 # clear environment on exit
 vacuum          = true
 # daemonize uwsgi and write messages into given log
-daemonize       = /home/udoms/uwsgi-emperor.log
-```
+daemonize       = /home/ubuntu/uwsgi-emperor.log
 
 
 
