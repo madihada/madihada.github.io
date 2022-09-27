@@ -1,3 +1,8 @@
+---
+layout: single
+title:  "Web Server Deployment(Nginx, Soket, uWsigi) 1단계!"
+---
+
 이번 블로그는 배포 2단계 과정 중 
 
 첫번째 단계!
