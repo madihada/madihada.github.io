@@ -1,26 +1,41 @@
 ---
 layout: single
-title:  "Web Server (Nginx, Soket, uWsigi)!"
+title:  "Web Server Deployment(Nginx, Soket, uWsigi) 2단계!"
 ---
-# 배포방법
- 
-## 개념 :   
 
-## 첫번째, uWSGI를 설치하여 Socket으로 Django와 통신한다. 
-#### (0) 코딩 없음, uWSGI를 wsgi.py 파일(settings.py가 있는 폴더에 위치함)과 연결하여 Django와 통신.
-#### (1) uWSGI 설치
-```
-sudo apt-get install python3.8-dev
-sudo apt-get install gcc
-pip install uwsgi
-```
-#### (2) uWSGI 사용방법
-이처럼 uWSGI는 runserver 처럼 실행을 시켜줘야만 runtime으로 실행 됨. 종료도 동일하게 ctrl+c 누르면 종료.
-```
-uwsgi --http :8000 --module funvocaback.wsgi
-```
+이번 블로그는 배포 2단계 과정 중
 
-## 두번째, Nginx 설치 
+두번째 단계!
+
+1. Nginx 설치 > Nginx를 socket과 연결하기 > 
+2. uWSGI 설치 > uWSGI를 socket과 연결하기 > uWSGI를 Django와 연결하기 > 
+3. 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
+4. emp
+<br>
+
+## 0. 개념
+```
+uWSGI는 
+- 장고 runserver처럼 cmd에 실행을 해줘야 함.
+- socket과 Django에 중간에서 양쪽으로 연결
+- 첫째로, socket과 연결 : /home/ubuntu/<장고프로젝트폴더>/.sock에 연결함
+- 둘째로, Django와 연결 : /home/ubuntu/<장고프로젝트폴더>/<장고프로젝트이름>/.wsgi에 연결함
+- 코딩이 필요없음
+Nginx
+- 설치하면 자동으로 root에서 실행됨.
+- 포트(client)와 socket에 중간에서 연결
+- /etc/nginx/sites-available/.sock에 연결하여 socket과 연결
+```
+<br>
+
+## 1. Nginx 설치 > Nginx를 socket과 연결하기 >
+
+#### 참고자료
+##### [nginx 설정 파일 추가 거의 없도록, static파일 위치 정확히 설정된 방법](https://www.youtube.com/watch?v=oGQ1HteFYnQ&t=1217s&ab_channel=%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC%EB%8F%99%EA%B5%AD%EB%8C%80%ED%95%99%EA%B5%90)
+##### [nginx 설정 파일 추가가 더 많지만 그 이유와 서버 죽었을 때 reboot되는 설정 추가된 방법](https://www.youtube.com/watch?v=ZpR1W-NWnp4&t=1579s&ab_channel=TonyTeachesTech)
+##### [위 방법의 text자료](https://tonyteaches.tech/django-nginx-uwsgi-tutorial/)
+<br>
+
 #### (1) 설치
 ```
 sudo apt-get install nginx
@@ -53,8 +68,7 @@ server {
 }
 ```
 
-#### (3) uwsgi_params 파일 생성 : /home/ubuntu/funvocaback/uwsgi_params
-#### manage.py파일 위치
+#### (3) uwsgi_params 파일 생성 : /home/ubuntu/funvocaback/uwsgi_params (manage.py파일이 있는 위치)
 
 ```
 uwsgi_param  QUERY_STRING       $query_string;
@@ -79,21 +93,39 @@ sudo ln -s /etc/nginx/sites-available/funvocaback.conf /etc/nginx/sites-enabled/
 ```
 #### (5) settings.py static 경로 추가
 
-settings.py파일 수정
+##### settings.py파일 수정
 ```
 import os
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 ```
-cmd에 명령어 입력
+##### cmd에 명령어 입력
 ```
 python manage.py collectstatic
 sudo /etc/init.d/nginx restart
 mkdir media
 wget https://upload.wikimedia.org/wikipedia/commons/b/b9/First-google-logo.gif -O media/media.gif
 ```
+<br>
 
-## 세번째, Nginx와 uWSGI 연결 
+## 2. uWSGI 설치 > uWSGI를 socket과 연결하기 > uWSGI를 Django와 연결하기 >
+#### (1) uWSGI 설치
+```
+sudo apt-get install python3.8-dev
+sudo apt-get install gcc
+pip install uwsgi
+```
+#### (2) uWSGI 간단사용방법
+이처럼 uWSGI는 runserver 처럼 실행을 시켜줘야만 runtime으로 실행 됨. 종료도 동일하게 ctrl+c 누르면 종료.
+```
+uwsgi --http :8000 --module funvocaback.wsgi
+uwsgi --http :8000 --module funvocaback.wsgi
+```
+
+
+
+
+## 세번째, uWSGI를 통해 Socket과 장고 연결 
 #### manage.py파일 위치
 ```
 uwsgi --socket <funvocaback.sock> --module <mywebserver>.wsgi --chmod-socket=666
