@@ -192,22 +192,52 @@ chmod-socket    = 666
 vacuum          = true
 # daemonize uwsgi and write messages into given log
 daemonize       = /home/ubuntu/uwsgi-emperor.log
-
-
-
-
-
-
-
-
-### -nginx 다시시작
 ```
-systemctl restart nginx
+#### 파일 실행 & 취소
 ```
-### cmd에 문법오류검사
+uwsgi --ini microdomains_uwsgi.ini
 ```
-nginx -t
+
+## 다섯번째, uWSGI를 통해 Socket과 장고 연결 
+
+#### let’s run uWSGI in emperor mode. 
+#### This will monitor the uWSGI config file directory for changes and will spawn vassals (i.e. instances) for each one it finds.
 ```
+cd /home/ubuntu/funvocaback/venv/
+mkdir vassals
+sudo ln -s /home/ubuntu/funvocaback/funvocaback_uwsgi.ini /home/ubuntu/venv/vassals/
+```
+
+
+## 여섯번째, Start up uWSGI when the system boots!
+#### Finally, we want to start up uWSGI when the system boots. 
+#### Create a systemd service file at '/etc/systemd/system/emperor.uwsgi.service' with the following content:
+```
+[Unit]
+Description=uwsgi emperor for funvocaback website
+After=network.target
+[Service]
+User=ubuntu
+Restart=always
+ExecStart=/home/ubuntu/venv/bin/uwsgi --emperor /home/ubuntu/venv/vassals --uid www-data --gid www-data
+[Install]
+WantedBy=multi-user.target
+```
+
+#### Enable the service to allow it to execute on system boot and start it so you can test it without a reboot.
+```
+systemctl enable emperor.uwsgi.service
+systemctl start emperor.uwsgi.service
+```
+#### Visit http://funvocaback.duckdns.org/webserver a browser and you will see the default Django landing page if everything works correctly.
+
+#### Check the status of the service and stop it as follows:
+```
+systemctl status emperor.uwsgi.service
+systemctl stop emperor.uwsgi.service
+```
+#### For good measure, reboot your system to make sure that your website is accessible at startup.
+
 
 
 
