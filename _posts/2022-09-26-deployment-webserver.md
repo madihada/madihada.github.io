@@ -7,10 +7,14 @@ title:  "Web Server Deployment(Nginx, Soket, uWsigi) 2단계!"
 
 두번째 단계!
 
-## 1. Nginx 설치 > Nginx를 socket과 연결하기 > 
-## 2. uWSGI 설치 > uWSGI를 socket과 연결하기 > uWSGI를 Django와 연결하기 > 
-## 3. 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
-4. emp
+## 첫번째, Nginx 설치 > Nginx를 socket과 연결하기 > 
+## 두번째, uWSGI 설치 > uWSGI를 socket과 연결하기 > uWSGI를 Django와 연결하기 > 
+## 세번째, 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
+## 네번째, Nginx와 uWSGI 연결을 설정파일 만들어 root에서 실행(runserver 없이도 runserver!)
+## 다섯번째, Let’s run uWSGI in emperor mode. 
+## 여섯번째, Start up uWSGI when the system boots!
+
+
 <br>
 
 ## 0. 개념
@@ -126,8 +130,9 @@ uwsgi --http :8000 --module funvocaback.wsgi
 uwsgi --socket funvocaback.sock --module mywebserver.wsgi --chmod-socket=666
 ```
 
-## 3. 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
-vim funvocaback_uwsgi.ini
+## 세번째, 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
+#### /home/ubuntu/funvocaback/ 위치
+#### vim funvocaback_uwsgi.ini
 ```
 [uwsgi]
 # full path to Django project's root directory
@@ -151,7 +156,7 @@ daemonize       = /home/ubuntu/uwsgi-emperor.log
 ```
 #### uWSGI root에서 실행
 ```
-uwsgi --ini microdomains_uwsgi.ini
+uwsgi --ini funvocaback_uwsgi.ini
 ```
 uWSGI emperor mode로 실행
 ```
@@ -162,15 +167,8 @@ sudo ln -s /home/ubuntu/funvocaback/funvocaback_uwsgi.ini /home/udoms/env/md/vas
 
 
 
-
-## 세번째, uWSGI를 통해 Socket과 장고 연결 
-#### manage.py파일 위치
-```
-uwsgi --socket <funvocaback.sock> --module <mywebserver>.wsgi --chmod-socket=666
-```
-
 ## 네번째, Nginx와 uWSGI 연결을 설정파일 만들어 root에서 실행(runserver 없이도 runserver!)
-#### manage.py파일 위치
+#### /home/ubuntu/funvocaback/ 위치
 #### home/ubuntu/funvocaback/microdomains_uwsgi.ini
 ```
 [uwsgi]
@@ -198,8 +196,7 @@ daemonize       = /home/ubuntu/uwsgi-emperor.log
 uwsgi --ini microdomains_uwsgi.ini
 ```
 
-## 다섯번째, uWSGI를 통해 Socket과 장고 연결 
-
+## 다섯번째, let’s run uWSGI in emperor mode.
 #### let’s run uWSGI in emperor mode. 
 #### This will monitor the uWSGI config file directory for changes and will spawn vassals (i.e. instances) for each one it finds.
 ```
