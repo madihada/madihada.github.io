@@ -123,8 +123,8 @@ pip install uwsgi
 #### (2) uWSGI 간단사용방법
 이처럼 uWSGI는 runserver 처럼 실행을 시켜줘야만 runtime으로 실행 됨. 종료도 동일하게 ctrl+c 누르면 종료.
 ```
-uwsgi --http :8000 --module funvocaback.wsgi
-uwsgi --http :8000 --module funvocaback.wsgi
+uwsgi --http :8000 --module mywebserver.wsgi
+uwsgi --http :8000 --module mywebserver.wsgi
 // /home/ubuntu/funvocaback(프로젝트이름)/funvocaback.sock과
 // /home/ubuntu/funvocaback(프로젝트이름/mywebserver(앱이름)/mywebserver.wsgi
 uwsgi --socket funvocaback.sock --module mywebserver.wsgi --chmod-socket=666
@@ -204,7 +204,10 @@ cd /home/ubuntu/funvocaback/venv/
 mkdir vassals
 sudo ln -s /home/ubuntu/funvocaback/funvocaback_uwsgi.ini /home/ubuntu/venv/vassals/
 ```
-
+#### Now you can run uWSGI in emperor mode as a test.
+```
+uwsgi --emperor /home/udoms/env/md/vassals --uid www-data --gid www-data
+```
 
 ## 여섯번째, Start up uWSGI when the system boots!
 #### Finally, we want to start up uWSGI when the system boots. 
