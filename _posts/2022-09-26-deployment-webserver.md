@@ -7,8 +7,8 @@ title:  "Web Server Deployment(Nginx, Soket, uWsigi) 2단계!"
 
 두번째 단계!
 
-- [첫번째, Nginx 설치 > Nginx를 socket과 연결하기 >](#1.-nginx-설치->-nginx를-socket과-연결하기->)
-## [두번째, uWSGI 설치 > uWSGI를 socket과 연결하기 > uWSGI를 Django와 연결하기 >](#1.-nginx-설치->-nginx를-socket과-연결하기->)
+## [첫번째, Nginx 설치 > Nginx를 socket과 연결하기 >](#1.-nginx-설치->-nginx를-socket과-연결하기->)
+## 두번째, uWSGI 설치 > uWSGI를 socket과 연결하기 > uWSGI를 Django와 연결하기 >
 ## 세번째, 모두 연결된 uWSGI를 root에서 실행하기 (uwsgi.ini파일을 통해서) > 
 ## 네번째, Nginx와 uWSGI 연결을 설정파일 만들어 root에서 실행(runserver 없이도 runserver!)
 ## 다섯번째, Let’s run uWSGI in emperor mode. 
