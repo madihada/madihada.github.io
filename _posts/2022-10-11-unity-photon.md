@@ -50,3 +50,17 @@ public class TurretCtrl : MonoBehaviour
     }
 }
 ```
+
+포톤 로그인 후 새 애플리케이션 생성
+
+앱스토어에서 임포트
+<br/>
+
+![image](https://user-images.githubusercontent.com/44697751/195003705-ee9a1d5c-0505-4b5b-850e-988b03f311e9.png)
+
+앱 ID 위자드에 프로젝트셋팅에 넣어주고 아래 그림처럼 설정되었는지 확인
+<br/>
+
+![image](https://user-images.githubusercontent.com/44697751/195004438-d44a1e4d-873d-4697-a751-1d5c3d1aa217.png)
+
+
