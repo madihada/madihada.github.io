@@ -64,3 +64,119 @@ public class TurretCtrl : MonoBehaviour
 ![image](https://user-images.githubusercontent.com/44697751/195004438-d44a1e4d-873d-4697-a751-1d5c3d1aa217.png)
 
 
+TCP 소켓 통신하기
+```C#
+# PhotonInit.cs
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
+
+public class PhotonInit : MonoBehaviourPunCallbacks     //포톤에서 제공하는 콜백함수도 쓸 수 있도록
+{
+    public string version = "1.0v";
+    public Text logText;                                //접속 여부 등을 표시할 텍스트
+
+    private void Awake()
+    {
+        PhotonNetwork.GameVersion = version;            //게임의 버전
+        PhotonNetwork.ConnectUsingSettings();           //포톤 클라우드에 접속을 시도
+    }
+    //포톤 클라우드 접속 성공 시 호출되는 콜백함수
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("Entered Lobby!");
+        PhotonNetwork.JoinRandomRoom();
+    }
+    //포톤 클라우드 접속 실패 시 호출되는 콜백함수
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Connect Error");
+        PhotonNetwork.ConnectUsingSettings();           //포톤 클라우드에 접속을 재시도
+    }
+    //무작위 룸 접속에 실패한 경우 호출되는 콜백 함수
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log("No rooms!");
+        PhotonNetwork.CreateRoom("My room", new RoomOptions { MaxPlayers = 20 });
+
+    }
+    //룸에 입장하면 호출되는 콜백 함수
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Enter room!");
+    }
+
+    private void Update()
+    {
+        logText.text = PhotonNetwork.NetworkClientState.ToString();
+    }
+}
+
+```
+
+탱크에 Photon View 컴포넌트 추가 (로컬인지 리모트인지 검사, 데이터 동기화) 그리고 UDP통신 선택
+
+![image](https://user-images.githubusercontent.com/44697751/195011296-b6861687-a88d-4146-bec4-602ce49e9ef1.png)
+
+
+탱크에 Photon Transform View 컴포넌트 추가
+
+![image](https://user-images.githubusercontent.com/44697751/195011385-7186f5cb-46c2-4120-a908-8312193fdf53.png)
+
+탱크 움직임 리모트와 원격 으로 나뉘어서 움직이도록 설정!
+```C#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityStandardAssets.Utility;
+using Photon.Pun;
+
+public class TankMove : MonoBehaviourPun
+{
+    public float moveSpeed = 20.0f;                             //이동속도
+    public float rotSpeed = 50.0f;                              //회전속도
+    //참조 컴포넌트 변수들
+    private Rigidbody rbody;  
+    private Transform tr;
+    //키보드 입력값 변수
+    private float h, v;
+    private PhotonView pv = null;                                //메인카메라가 추적할 대상(CamPivot 오브젝트)
+
+    public Transform camPivot;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rbody = GetComponent<Rigidbody>();
+        tr = GetComponent<Transform>();
+        pv = GetComponent<PhotonView>();
+        if (pv.IsMine)                                          //로컬인지 아닌지 검사
+        {
+            //로컬인 경우
+            Camera.main.GetComponent<SmoothFollow>().target = camPivot;
+            rbody.centerOfMass = new Vector3(0.0f, -0.5f, 0.0f);    //탱크의 rigidbody 무게중심 낮게 설정
+        }
+        else
+        {
+            rbody.isKinematic = true;
+        }
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!pv.IsMine) return;
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
+
+        tr.Rotate(Vector3.up * rotSpeed * h * Time.deltaTime);
+        tr.Translate(Vector3.forward * v * moveSpeed * Time.deltaTime);
+    }
+}
+
+```
