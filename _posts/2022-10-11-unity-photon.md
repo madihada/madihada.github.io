@@ -102,17 +102,23 @@ public class PhotonInit : MonoBehaviourPunCallbacks     //포톤에서 제공하
     {
         Debug.Log("No rooms!");
         PhotonNetwork.CreateRoom("My room", new RoomOptions { MaxPlayers = 20 });
-
     }
     //룸에 입장하면 호출되는 콜백 함수
     public override void OnJoinedRoom()
     {
         Debug.Log("Enter room!");
+        CreateTank();                                   //탱크를 네트워크 공간에 생성
     }
 
     private void Update()
     {
         logText.text = PhotonNetwork.NetworkClientState.ToString();
+    }
+
+    void CreateTank()
+    {
+        float pos = Random.Range(-100f, 100f);
+        PhotonNetwork.Instantiate("Tank", new Vector3(pos, 20f, pos), Quaternion.identity, 0);
     }
 }
 
@@ -129,6 +135,8 @@ public class PhotonInit : MonoBehaviourPunCallbacks     //포톤에서 제공하
 
 탱크 움직임 리모트와 원격 으로 나뉘어서 움직이도록 설정!
 ```C#
+#TankMove.cs
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -178,5 +186,4 @@ public class TankMove : MonoBehaviourPun
         tr.Translate(Vector3.forward * v * moveSpeed * Time.deltaTime);
     }
 }
-
 ```
