@@ -202,11 +202,11 @@ uwsgi --ini microdomains_uwsgi.ini
 ```
 cd /home/ubuntu/funvocaback/venv/
 mkdir vassals
-sudo ln -s /home/ubuntu/funvocaback/funvocaback_uwsgi.ini /home/ubuntu/venv/vassals/
+sudo ln -s /home/ubuntu/funvocaback/funvocaback_uwsgi.ini /home/ubuntu/funvocaback/venv/vassals/
 ```
 #### Now you can run uWSGI in emperor mode as a test.
 ```
-uwsgi --emperor /home/udoms/env/md/vassals --uid www-data --gid www-data
+uwsgi --emperor /home/ubuntu/funvocaback/venv/vassals --uid www-data --gid www-data
 ```
 
 ## 여섯번째, Start up uWSGI when the system boots!
