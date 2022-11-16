@@ -11,12 +11,13 @@ title:  "3D Game Kit을 사용하여 커스텀 개임을 개발하기 2탄!"
 <br>
 
 ##### 1) Package 설치:
-- https://github.com/febucci/unitypackage-custom-hierarchy : custom-hierarchy
-- 3D Game Kit 
+- X https://github.com/febucci/unitypackage-custom-hierarchy : Custom Hierarchy for Unity
+- O 3D Game Kit 
 <br>
    
 ##### 2) 프로젝트 파일 설정
-- 안드로이드 변경
+- O 안드로이드 변경
+- 
 <br>
    
 ##### 3) Layout 설정: 
