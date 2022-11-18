@@ -177,3 +177,17 @@ using UnityStandardAssets.CrossPlatformInput;
 <br>
 
 ##### 2) 점프 및 공격 버튼 : https://www.youtube.com/watch?v=SOL0ABaLwAE&t=266s&ab_channel=SahaniStudio 참조
+<br>
+
+# 로그인 구현
+<br>
+
+# 홈화면 구현
+<br>
+
+# Writing 구현
+<br>
+
+# Speaking 구현
+<br>
+
