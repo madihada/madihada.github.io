@@ -3,27 +3,37 @@ layout: single
 title:  "3D Game Kit을 사용하여 커스텀 개임을 개발하기 2탄!"
 ---
 
+
 # 3D Game Kit을 사용하여 커스텀 개임을 개발하기 - 2탄 개발하기
 <br>
 
+<details>
+<summary>접기/펼치기</summary>
+
 #### 유니티 버전 : 2021.3.12f1 : 1년 전 중 가장 최신
-#### 패키지설치 : 
 <br>
 
 ##### 1) Package 설치:
 - X https://github.com/febucci/unitypackage-custom-hierarchy : Custom Hierarchy for Unity(설치불가)
 - O 3D Game Kit 
 <br>
-   
+
 ##### 2) 프로젝트 파일 설정
 - O 안드로이드 변경 & 패키지 설치(Post Processing, Joystick Pack, Standard Assets)
 <br>
-   
+
 ##### 3) Layout 설정: 
 - PJH.wlt 파일 사용
 <br>
+  
+</details>
+<br>
+  
            
 # 캐릭터이동 및 카메라 앵글이동(조이스틱 및 터치 로테이션)
+<details>
+<summary>접기/펼치기</summary>
+
 #### 1. 카메라 앵글이동 : https://www.youtube.com/watch?v=bk19NYT_ZIY&ab_channel=SahaniStudio 참조
 ##### 1) 기존 카메라 앵글이동 끄기
 <details>
@@ -175,9 +185,13 @@ using UnityStandardAssets.CrossPlatformInput;
 ``` 
 </details>
 <br>
-
+  
 ##### 2) 점프 및 공격 버튼 : https://www.youtube.com/watch?v=SOL0ABaLwAE&t=266s&ab_channel=SahaniStudio 참조
 <br>
+
+</details>
+<br>
+  
 
 # 로그인 구현
 <br>
