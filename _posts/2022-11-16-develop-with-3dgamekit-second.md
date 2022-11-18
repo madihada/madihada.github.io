@@ -199,27 +199,26 @@ using UnityStandardAssets.CrossPlatformInput;
 # @ 홈화면 구현
 <br>
   
-# O 게임1 구현
+# O 게임1 구현(기본 게임플레이)
+<br>
+
+## O 게임1 : TCP Chat 구현
+<br>
+
+## 게임1 : Speaking 구현
+<br>
+
+## 게임1 : Writing 구현
+<br>
+
+## 게임1 : 단어 추천 및 학습 단어 현황 구현
 <br>
   
-# 게임2 구현
+## 게임1 : 멀티플레이 구현 : 위와 동일하게 구현
 <br>
 
-# @ 게임1 : TCP Chat 구현
-<br>
-
-# 게임1 : Speaking 구현
-<br>
-
-# 게임1 : Writing 구현
-<br>
-
-# 게임1 : 단어 추천 및 학습 단어 현황 구현
+# 게임2 구현(기본 게임플레이)
 <br>
   
-# 게임1 : 멀티플레이 구현 : 위와 동일하게 구현
+## 게임2 : TCP Chat 구현
 <br>
-
-# 게임2 : 위와 동일하게 구현
-<br>
-
