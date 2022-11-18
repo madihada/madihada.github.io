@@ -199,13 +199,13 @@ using UnityStandardAssets.CrossPlatformInput;
 # @ 홈화면 구현
 <br>
   
-# @ 게임1 구현
+# O 게임1 구현
 <br>
   
-# @ 게임2 구현
+# 게임2 구현
 <br>
 
-# 게임1 : TCP Chat 구현
+# @ 게임1 : TCP Chat 구현
 <br>
 
 # 게임1 : Speaking 구현
