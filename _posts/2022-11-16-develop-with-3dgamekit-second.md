@@ -30,7 +30,7 @@ title:  "3D Game Kit을 사용하여 커스텀 개임을 개발하기 2탄!"
 <br>
   
            
-# 캐릭터이동 및 카메라 앵글이동(조이스틱 및 터치 로테이션)
+# O 캐릭터이동 및 카메라 앵글이동(조이스틱 및 터치 로테이션)
 <details>
 <summary>접기/펼치기</summary>
 
@@ -193,15 +193,33 @@ using UnityStandardAssets.CrossPlatformInput;
 <br>
   
 
-# 로그인 구현
+# O 로그인 구현
 <br>
 
-# 홈화면 구현
+# @ 홈화면 구현
+<br>
+  
+# @ 게임1 구현
+<br>
+  
+# @ 게임2 구현
 <br>
 
-# Writing 구현
+# 게임1 : TCP Chat 구현
 <br>
 
-# Speaking 구현
+# 게임1 : Speaking 구현
+<br>
+
+# 게임1 : Writing 구현
+<br>
+
+# 게임1 : 단어 추천 및 학습 단어 현황 구현
+<br>
+  
+# 게임1 : 멀티플레이 구현 : 위와 동일하게 구현
+<br>
+
+# 게임2 : 위와 동일하게 구현
 <br>
 
