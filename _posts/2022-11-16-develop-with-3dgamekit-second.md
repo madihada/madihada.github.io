@@ -197,6 +197,7 @@ using UnityStandardAssets.CrossPlatformInput;
 <br>
 
 # @ 홈화면 구현
+  -db에 들어갈 단어 10개
 <br>
   
 # O 게임1 구현(기본 게임플레이)
