@@ -196,7 +196,7 @@ using UnityStandardAssets.CrossPlatformInput;
 # O 로그인 구현
 <br>
 
-# @ 홈화면 구현
+# O (대기) 홈화면 구현
   -db에 들어갈 단어 10개
 <br>
   
@@ -206,8 +206,17 @@ using UnityStandardAssets.CrossPlatformInput;
 ## O 게임1 : TCP Chat 구현
 <br>
 
-## 게임1 : Speaking 구현
+## @ 게임1 : Speaking 구현
 <br>
+  
+  ```cs
+  # Speech to Text
+  # SpeechToText.cs
+  
+  # 첫번째로 녹음 파일 만들기
+  # Microphone을 활용
+  
+  ```
 
 ## 게임1 : Writing 구현
 <br>
