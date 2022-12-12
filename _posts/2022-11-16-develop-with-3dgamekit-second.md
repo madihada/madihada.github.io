@@ -484,7 +484,30 @@ public class PostJsonToServer : MonoBehaviour
   # Microphone을 활용
   
   ```
+  
+  
+  ### 두번째 몬스터에 접근하면 몬스터가 가진 퀴즈 팝업으로 질문 & 대답
+  
+  원리,,
+  ```cs
+  # MonsterController.cs
+  1. OnCollisionEnter()                     // 충돌체크
+  1-1. canvas.SetActive(true);              // InputController로 이동
+  
+  # InputController.cs
+  2. OnEndEditEvent()                                     // Input Field에 입력값 받아와서 정답 체크
+  2-2. GameManager.instance.IsMonsterOver = true;         // GameManager을 통해서 MonsterController 이동 하여 파괴 준비
+  
+  # GameManager.cs
+  3. public bool IsMonsterOver Invoke("DeleteMonster", 0.5f);       // 프로퍼티로 델리게이트 소환
+  3-1. public void DeleteMonster() OnMonsterDie();                  // 델리게이트로 다른 스크립트 함수 실행
+  
+  # MonsterController.cs
+  4. public void DeleteMonster() Destroy(willDestroyObject);        // 해당 몬스터 파괴
 
+  ```
+  
+  
 ## 게임1 : Writing 구현
 <br>
 
