@@ -1,6 +1,7 @@
 ---
 layout: single
 title:  "Github 사용방법!"
+categories: git
 ---
 
 먼저, 깃은 3개의 공간과, 브랜치라는 차원으로 나뉘어지고 특정 공간과 특정 차원의 원활한 통신방법이 핵심이다.
