@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "3D Game Kit을 사용하여 커스텀 개임을 개발하기 2탄!"
-categories: unity
+categories: ['programing', 'unity']
 ---
 
 
