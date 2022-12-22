@@ -88,6 +88,7 @@ vscode 터미널을 git bash로 설정
 ```
   git push origin --delete utility
 ```
+```
   / /로컬 브랜치 원격에 넣어주기
   git switch -c <브랜치이름>
   git push -u origin <동일한브랜치이름>
