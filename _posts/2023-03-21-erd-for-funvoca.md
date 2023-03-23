@@ -9,8 +9,14 @@
 
 - Weak Relationship   
 한 값 이상의 값을 가진 attribute입니다.   
-## [2] Entity와 Entity를 이어주는 Entity가 있는것 같은데 직관적이지 않아서 잘 모르겠다.
-
+## [2] Entity와 Entity를 이어주는 Entity가 있는것 같은데 직관적이지 않아서 잘 모르겠다.  
+  
+  
+## [3] one to one, one to many, many to many 테이블 작성 방법.
+  
+  
+## [4] attribute 안에 여러가지 내용이 있을 때 어떤 방식으로 따로 테이블로 빼주는지.
+---
 # ERD 기호들과 표기법
 
 ## ERD 요소들
