@@ -1,3 +1,10 @@
+---
+layout: single
+title:  "Funvoca 게임 기획-1-퀘스트!"
+categories: ['game', 'design']
+---
+
+
 ### [0] 게임 전반의 이야기 전개 + 스토리텔링 + 감동
 <br></br>
 ### [1] 개발사의 목적  ==  학생(유저)의 목적  
