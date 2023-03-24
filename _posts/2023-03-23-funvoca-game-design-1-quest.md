@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Funvoca 게임 기획-1-퀘스트!"
 categories: ['game', 'design']
 ---
