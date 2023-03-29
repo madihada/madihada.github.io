@@ -6,11 +6,25 @@
   - [1.4. 그러면 optionality의 'required', 'optional'과 CASCADE는 어떤 차이야?](#14-그러면-optionality의-required-optional과-cascade는-어떤-차이야)
   - [1.5. one to one, one to many, many to many 테이블 작성 방법은?.](#15-one-to-one-one-to-many-many-to-many-테이블-작성-방법은)
   - [1.6. N:M은 1:N으로 변경은 어떻게해?.](#16-nm은-1n으로-변경은-어떻게해)
+  - [1.7. 1:1 관계에서 Primary Key로 Foreign Key로 쓰면 auto ingrement없이 좋은 성능으로 사용 가능!](#17-11-관계에서-primary-key로-foreign-key로-쓰면-auto-ingrement없이-좋은-성능으로-사용-가능)
+  - [1.8. 제1 정규화 : 복수의 데이터 제거](#18-제1-정규화--복수의-데이터-제거)
+    - [1.8.1. 복수의 데이터가 있는 attribute를 entity로 만들어줌.](#181-복수의-데이터가-있는-attribute를-entity로-만들어줌)
+    - [1.8.2. 이 때, N:M인지 확인 -\> 맞다면 -\> 중간 테이블 생성.](#182-이-때-nm인지-확인---맞다면---중간-테이블-생성)
+  - [1.9. 제2 정규화 : 테이블 안 attribute의 데이터의 중복 제거](#19-제2-정규화--테이블-안-attribute의-데이터의-중복-제거)
+  - [1.10. 제3 정규화 :  테이블 안 attribute 중복 제거](#110-제3-정규화---테이블-안-attribute-중복-제거)
+- [2. ERD 사용법](#2-erd-사용법)
+  - [2.1. 개념적 다이어그램 작성](#21-개념적-다이어그램-작성)
+  - [2.2. Join Table 생성 조건이 아니라면](#22-join-table-생성-조건이-아니라면)
+  - [2.3. Join Table 생성 조건이라면](#23-join-table-생성-조건이라면)
+  - [2.4. Cardinality Optionality 결정은 위에서 끝났고, 참조 무결성 원칙을 위해 CASCADE 결정](#24-cardinality-optionality-결정은-위에서-끝났고-참조-무결성-원칙을-위해-cascade-결정)
 
 
-# 1. ERD 질문
+># 1. ERD 질문
 ## 1.1. Mutlivalued Attribute는 어떻게 테이블을 작성해?
-결론 : 한 사람이 여러개의 전화번호를 가질 수 있기때문에 attribute를 entity로 변경하여 테이블을 추가한다.  
+결론 : 한 사람이 여러개의 전화번호를 가질 수 있기때문에 attribute를 entity로 변경하여 테이블을 추가한다.    
+  
+첫 번째, 테이블 1개 추가 : attribute가 1개 일 때  
+두 번째, 테이블 2개 추가(조인테이블) : attribute가 2개 이상일 때  
 ```sql
 -- 사람 테이블 생성
 CREATE TABLE person (
@@ -29,7 +43,8 @@ CREATE TABLE phone_number (
 <br>
  
 ## 1.2. mysql에서 optionality의 'required', 'optional'은 테이블에 코드로 어떻게 표현돼?  
-결론 :  optionality는 테이블 간의 관계를 정의할 때 사용되는 외래 키(Foreign Key) 제약 조건을 통해 나타낸다.
+결론 : 1:N에서 N이 되는 테이블에 FK에 null 혹은 not null로 표현됨.   
+optionality는 테이블 간의 관계를 정의할 때 사용되는 외래 키(Foreign Key) 제약 조건을 통해 나타낸다.  
 ```sql
 // 예를 들어, 다음과 같은 두 개의 테이블이 있다고 가정해보겠습니다.
 
@@ -99,3 +114,44 @@ CREATE TABLE customers (
 중간테이블 작성 : FK로 두 테이블의 PK 가져옴  
 Cardinality : 개념적 다이어그램 그대로  
 Optionality : 개념적 다이어그램 그대로  
+
+
+## 1.7. 1:1 관계에서 Primary Key로 Foreign Key로 쓰면 auto ingrement없이 좋은 성능으로 사용 가능!
+  <br>
+
+## 1.8. 제1 정규화 : 복수의 데이터 제거
+### 1.8.1. 복수의 데이터가 있는 attribute를 entity로 만들어줌.
+### 1.8.2. 이 때, N:M인지 확인 -> 맞다면 -> 중간 테이블 생성.
+
+그런데 왜 중간 테이블을 만들지? 없으면 테이블 1개 추가로 끝나 효율적일텐데
+가능성1. null 값ㅇ
+
+
+## 1.9. 제2 정규화 : 테이블 안 attribute의 데이터의 중복 제거
+  <br>
+
+## 1.10. 제3 정규화 :  테이블 안 attribute 중복 제거
+  <br>
+
+># 2. ERD 사용법
+  <br>
+  
+## 2.1. 개념적 다이어그램 작성
+  <br>
+  
+## 2.2. Join Table 생성 조건이 아니라면 
+  - 관계 없음 : 각 테이블에 PK 있음, FK 없음.  
+  - 1:1 관계 : 의존 테이블에 PK가 FK로 옴. FK 1개  (예시, '단어'&'의미'테이블)
+  - 1:N 관계 & attribute 1개 : Join 테이블에 PK가 FK로 옴. FK 1개 
+  <br>
+
+## 2.3. Join Table 생성 조건이라면 
+  - 1:N 관계 & attribute 복수 : 의존 테이블에 PK있음, FK로 각 테이블의 PK가 옴. FK 2개  
+  - N:M 관계는 1:N으로 변경: 의존 테이블에 PK있음, FK로 각 테이블의 PK가 옴. FK 2개  
+    - Join table 생성 시 3개의 entity를 연결해주는 4개의 관계가 있음(2개에서 4개가 됨)
+    - (1) table -> join table : 관계가 그대로 옴.
+    - (2) join table -> table : 무조건 1:1관계에 required이다. 왜냐하면 "join테이블의 역할이 N:M을 1:N으로 변경"하고 "join table이 있다면 table이 있어야만 함"
+![image](https://user-images.githubusercontent.com/44697751/228404480-53d45bd1-d5d6-435a-8536-5e518ad4075d.png)
+  <br>
+  
+## 2.4. Cardinality Optionality 결정은 위에서 끝났고, 참조 무결성 원칙을 위해 CASCADE 결정
