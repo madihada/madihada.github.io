@@ -68,6 +68,7 @@ vscode 터미널을 git bash로 설정
 
 중요중요!!!!!
 ## 3. 로컬 branch와 원격 branch 연동
+### 3-1. 로컬 branch를 원격에 연동 할 때
 ```
   git remote add origin <원격주소>
   git branch -M main
@@ -75,18 +76,25 @@ vscode 터미널을 git bash로 설정
 #### 첫째, local branch를 remote branch에 추가
 ```
   git push -u origin <로컬브랜치와 동일한 이름의 원격브랜치(sync)> 
+  -u는 밑 둘째와 동일 : 이미 존재하는 로컬 브랜치가 원격 브랜치를 추적하도록 설정
 ```
-#### 둘째, local branch, remote branch 연동
+#### 둘째, local branch, remote branch 연동 (목적은 나중에 git push 요렇게만 쓰면 push됨)
 ```
   git branch --set-upstream-to origin/<브랜치 이름> 
+  이미 존재하는 로컬 브랜치가 원격 브랜치를 추적하도록 설정
 ```  
+
+### 3-2. 원격 branch를 로컬에 가져올 때
+
 #### 셋째, remote에있는 브랜치 가져오기 연동
 ```
   git checkout --track origin/utility
 ```
 #### 넷째, remote에있는 브랜치 삭제하기 연동
 ```
-  git push origin --delete utility
+  git push origin --delete <원격 브랜치 이름>
+  
+  git branch -d <로컬 브랜치 이름>
 ```
 ```
   / /로컬 브랜치 원격에 넣어주기
@@ -191,3 +199,5 @@ vscode 터미널을 git bash로 설정
   git rebase --about
   git rebase --continue
 ```
+
+## 10. git remote prune origin : 로컬에서 origin branch검색 시 업데이트가 안 됨. 그래서 이 방법으로 로컬의 원격정보와 실제 원격정보를 맞출 수 있음.
